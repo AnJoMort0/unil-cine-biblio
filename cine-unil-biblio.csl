@@ -19,7 +19,7 @@
     <category field="history"/>
     <category field="cinema"/>
     <summary>Bibliographie selon le Guide à l’élaboration d’une bibliographie de la Section d'histoire et esthétique du cinéma de l'université de Lausanne, Suisse (UNIL)</summary>
-    <updated>2023-12-29T10:38:26+00:00</updated>
+    <updated>2023-12-29T10:43:16+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">BCUL site Unithèque/Pascale Sahy/2020</rights>
   </info>
   <locale xml:lang="fr">
@@ -714,19 +714,13 @@
             </else-if>
             <else-if type="motion_picture" match="any">
               <group suffix=".">
-                <text macro="author" suffix=", "/>
                 <text macro="title"/>
-                <text macro="edition" prefix=", "/>
-                <text variable="publisher-place" prefix=", "/>
-                <text macro="yearpage" prefix=", "/>
-                <text variable="dimensions" prefix=", "/>
-                <text variable="medium" prefix=", "/>
-                <group prefix=", dans " delimiter=", ">
-                  <text variable="publisher"/>
-                  <text variable="collection-title" font-style="italic"/>
+                <group delimiter="," prefix="(" suffix=") ">
+                  <text macro="original-title"/>
+                  <text macro="author" suffix=", "/>
+                  <text macro="chapter"/>
+                  <text macro="yearpage" prefix=", "/>
                 </group>
-                <text variable="archive" prefix=", "/>
-                <text macro="url" prefix=", "/>
               </group>
             </else-if>
             <else-if type="paper-conference" match="any">
