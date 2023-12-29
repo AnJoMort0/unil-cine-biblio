@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" delimiter-precedes-et-al="always" delimiter-precedes-last="never" et-al-min="3" page-range-format="expanded" default-locale="fr-CH">
+  <!-- This style was edited with the Visual CSL Editor (https://editor.citationstyles.org/visualEditor/) -->
   <info>
     <title>Consignes bibliographiques - UNIL Section d'histoire et esthétique du cinéma (Français - Suisse)</title>
     <title-short>Cine UNIL</title-short>
@@ -18,7 +19,7 @@
     <category field="history"/>
     <category field="cinema"/>
     <summary>Bibliographie selon le Guide à l’élaboration d’une bibliographie de la Section d'histoire et esthétique du cinéma de l'université de Lausanne, Suisse (UNIL)</summary>
-    <updated>2023-12-28T21:06:42+00:00</updated>
+    <updated>2023-12-29T10:38:26+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">BCUL site Unithèque/Pascale Sahy/2020</rights>
   </info>
   <locale xml:lang="fr">
@@ -28,7 +29,7 @@
       <term name="ordinal-03">e</term>
       <term name="ordinal-04">e</term>
       <term name="cited">op. cit.</term>
-      <term name="long-ordinal-01"></term>
+      <term name="long-ordinal-01"/>
       <term name="editor" form="short">dir.</term>
       <term name="loc-cit" form="short">Idem. </term>
       <term name="cited">cité par </term>
@@ -220,8 +221,8 @@
         <text variable="title" text-case="capitalize-first" font-style="italic" font-weight="bold"/>
       </if>
       <else-if type="article-journal article-newspaper article-magazine song" match="any">
-        <group delimiter=", ">
-          <text variable="title" text-case="capitalize-first" quotes="true" font-weight="normal"/>
+        <group text-decoration="none" delimiter=", ">
+          <text variable="title" text-case="capitalize-first" quotes="false" font-weight="normal" prefix="« " suffix=" »"/>
           <text variable="container-title" font-style="italic" font-weight="bold"/>
         </group>
       </else-if>
@@ -255,8 +256,13 @@
           <text variable="container-title" text-case="capitalize-first" font-style="italic" font-weight="bold"/>
         </group>
       </else-if>
+      <else-if type="motion_picture" match="any">
+        <group font-style="italic" font-weight="bold">
+          <text variable="title"/>
+        </group>
+      </else-if>
       <else>
-        <group delimiter="">
+        <group font-weight="normal">
           <choose>
             <if variable="container-title" match="any">
               <text variable="title" text-case="capitalize-first" quotes="true" font-style="normal" font-weight="normal"/>
@@ -478,7 +484,6 @@
           <date variable="issued">
             <date-part name="year"/>
           </date>
-          <text variable="page" prefix=", "/>
         </group>
       </else-if>
       <else-if type="webpage post-weblog" match="any">
@@ -503,6 +508,23 @@
         </group>
       </else>
     </choose>
+  </macro>
+  <macro name="original-title">
+    <choose>
+      <if type="motion_picture" match="any">
+        <group>
+          <text variable="original-title" font-style="italic" font-weight="bold"/>
+        </group>
+      </if>
+      <else>
+        <group>
+          <text variable="original-title"/>
+        </group>
+      </else>
+    </choose>
+  </macro>
+  <macro name="chapter">
+    <text variable="chapter-number"/>
   </macro>
   <citation et-al-min="4" et-al-use-first="1">
     <layout>
@@ -987,19 +1009,13 @@
         </else-if>
         <else-if type="motion_picture" match="any">
           <group suffix=".">
-            <text macro="author-bib" suffix=" "/>
             <text macro="title"/>
-            <text macro="edition" prefix=", "/>
-            <text variable="publisher-place" prefix=", "/>
-            <text macro="yearpage-bib" prefix=", "/>
-            <text variable="dimensions" prefix=", "/>
-            <text variable="medium" prefix=", "/>
-            <group prefix=", dans " delimiter=", ">
-              <text variable="publisher"/>
-              <text variable="collection-title" font-style="italic"/>
+            <group delimiter="," prefix="(" suffix=").">
+              <text macro="original-title"/>
+              <text macro="author-bib" suffix=" "/>
+              <text macro="chapter"/>
+              <text macro="yearpage-bib" prefix=", "/>
             </group>
-            <text variable="archive" prefix=", "/>
-            <text macro="url" prefix=", "/>
           </group>
         </else-if>
         <else-if type="paper-conference" match="any">
