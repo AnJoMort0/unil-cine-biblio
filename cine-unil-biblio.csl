@@ -1,6 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!--À CORRIGER :
+
+    - Bizarrement interviews mettent le lien en double
+    - Idem ne fonctionne pas du tout, Ibid est mit à sa place
+
+-->
+
+<?xml version="1.7" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" delimiter-precedes-et-al="always" delimiter-precedes-last="never" et-al-min="3" page-range-format="expanded" default-locale="fr-CH">
-  <!-- This style was edited with the Visual CSL Editor (https://editor.citationstyles.org/visualEditor/) -->
   <info>
     <title>Consignes bibliographiques - UNIL Section d'histoire et esthétique du cinéma (Français - Suisse)</title>
     <title-short>Cine UNIL</title-short>
@@ -19,7 +25,7 @@
     <category field="history"/>
     <category field="cinema"/>
     <summary>Bibliographie selon le Guide à l’élaboration d’une bibliographie de la Section d'histoire et esthétique du cinéma de l'université de Lausanne, Suisse (UNIL)</summary>
-    <updated>2024-01-16T17:54:48+00:00</updated>
+    <updated>2024-01-16T23:54:48+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">BCUL site Unithèque/Pascale Sahy/2020</rights>
   </info>
   <locale xml:lang="fr">
@@ -710,6 +716,7 @@
                   </date>
                 </group>
                 <text macro="yearpage" prefix=", "/>
+                <text macro="url" prefix=", "/>
               </group>
             </else-if>
             <else-if type="motion_picture" match="any">
@@ -999,6 +1006,7 @@
               </date>
             </group>
             <text macro="yearpage-bib" prefix=", "/>
+            <text macro="url" prefix=", "/>
           </group>
         </else-if>
         <else-if type="motion_picture" match="any">
