@@ -32,7 +32,6 @@
       <term name="long-ordinal-01"/>
       <term name="editor" form="short">dir.</term>
       <term name="loc-cit" form="short">Idem. </term>
-      <term name="cited">cité par </term>
     </terms>
   </locale>
   <macro name="author">
