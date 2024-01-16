@@ -19,7 +19,7 @@
     <category field="history"/>
     <category field="cinema"/>
     <summary>Bibliographie selon le Guide à l’élaboration d’une bibliographie de la Section d'histoire et esthétique du cinéma de l'université de Lausanne, Suisse (UNIL)</summary>
-    <updated>2023-12-29T10:43:16+00:00</updated>
+    <updated>2024-01-16T17:54:48+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">BCUL site Unithèque/Pascale Sahy/2020</rights>
   </info>
   <locale xml:lang="fr">
@@ -127,7 +127,8 @@
     <choose>
       <if variable="issued" match="any">
         <date variable="issued">
-          <date-part name="month" suffix=" "/>
+          <date-part name="day" form="numeric-leading-zeros"/>
+          <date-part name="month" prefix=" " suffix=" "/>
           <date-part name="year"/>
         </date>
       </if>
@@ -281,7 +282,7 @@
     </names>
   </macro>
   <macro name="url">
-    <group prefix=" disponible sur : ">
+    <group prefix=" disponible sur : ">
       <choose>
         <if variable="DOI">
           <text variable="DOI" prefix="https://doi.org/"/>
@@ -294,7 +295,7 @@
     <group delimiter=" " prefix=" (" suffix=")">
       <text value="consulté le" suffix=" "/>
       <date delimiter="." variable="accessed">
-        <date-part name="day"/>
+        <date-part name="day" form="numeric-leading-zeros"/>
         <date-part name="month" form="numeric-leading-zeros"/>
         <date-part name="year"/>
       </date>
@@ -359,7 +360,7 @@
             <else-if variable="locator" match="none">
               <group>
                 <text variable="volume" prefix=", tome "/>
-                <text variable="page" prefix=", pp. "/>
+                <text variable="page" prefix=", pp. "/>
               </group>
             </else-if>
           </choose>
@@ -509,7 +510,7 @@
       </else>
     </choose>
   </macro>
-  <macro name="original-title">
+    <macro name="original-title">
     <choose>
       <if type="motion_picture" match="any">
         <group>
@@ -586,7 +587,7 @@
                 <text macro="issue" prefix=", "/>
                 <group prefix=" (" suffix=")">
                   <date variable="issued">
-                    <date-part name="day" prefix="" suffix=" "/>
+                    <date-part name="day" form="numeric-leading-zeros" suffix=" "/>
                     <date-part name="month" suffix=" "/>
                     <date-part name="year"/>
                   </date>
