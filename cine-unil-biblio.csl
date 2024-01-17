@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" delimiter-precedes-et-al="always" delimiter-precedes-last="never" et-al-min="3" page-range-format="expanded" default-locale="fr-CH">
-  <!-- This style was edited with the Visual CSL Editor (https://editor.citationstyles.org/visualEditor/) -->
-  <!-- À CORRIGER : Idem et double URL dans interviews-->
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.8" delimiter-precedes-et-al="always" delimiter-precedes-last="never" et-al-min="3" page-range-format="expanded" default-locale="fr-CH">
+  <!-- À CORRIGER : les ibids/op cit ne sont pas parfaits, pas toujours de pp. et double URL dans interviews-->
   <info>
     <title>Consignes bibliographiques - UNIL Section d'histoire et esthétique du cinéma (Français - Suisse)</title>
     <title-short>Cine UNIL</title-short>
@@ -20,7 +19,7 @@
     <category field="history"/>
     <category field="cinema"/>
     <summary>Bibliographie selon le Guide à l’élaboration d’une bibliographie de la Section d'histoire et esthétique du cinéma de l'université de Lausanne, Suisse (UNIL)</summary>
-    <updated>2024-01-16T23:54:48+00:00</updated>
+    <updated>2024-01-17T00:54:48+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">BCUL site Unithèque/Pascale Sahy/2020</rights>
   </info>
   <locale xml:lang="fr">
@@ -32,7 +31,8 @@
       <term name="cited">op. cit.</term>
       <term name="long-ordinal-01"/>
       <term name="editor" form="short">dir.</term>
-      <term name="loc-cit" form="short">Idem. </term>
+      <term name="loc-cit" form="short">Ibid.</term>
+      <term name="ibid" form="short">Idem.</term>
     </terms>
   </locale>
   <macro name="author">
@@ -60,7 +60,7 @@
   <macro name="author-ibid">
     <names variable="interviewer">
       <name form="long" and="text" delimiter-precedes-last="never" sort-separator=" " font-style="normal">
-        <name-part name="family" text-case="uppercase"/>
+        <name-part name="family" text-case="capitalize-first"/>
       </name>
       <substitute>
         <names variable="author"/>
@@ -234,7 +234,7 @@
               <text variable="title" text-case="capitalize-first" quotes="true" font-style="italic" font-weight="bold" suffix=", "/>
             </if>
             <else-if variable="container-title" match="none">
-              <text variable="title" text-case="capitalize-first" font-style="italic"/>
+              <text variable="title" text-case="capitalize-first" font-style="italic" font-weight="bold"/>
             </else-if>
           </choose>
         </group>
@@ -532,17 +532,17 @@
       <choose>
         <if position="ibid-with-locator">
           <group delimiter=" ">
-            <text term="ibid" text-case="capitalize-first" font-style="italic" suffix=","/>
+            <text term="loc-cit" text-case="capitalize-first" font-style="italic" font-weight="bold" suffix=","/>
             <label variable="locator" form="short"/>
             <text variable="locator" suffix="."/>
           </group>
         </if>
         <else-if position="ibid">
-          <text term="ibid" text-case="capitalize-first" font-style="italic"/>
+          <text term="ibid" form="short" text-case="capitalize-first" font-style="italic" font-weight="bold"/>
         </else-if>
         <else-if position="subsequent">
           <group delimiter=", ">
-            <text macro="author-ibid"/>
+            <text macro="author"/>
             <choose>
               <if disambiguate="true">
                 <text macro="title"/>
@@ -550,15 +550,16 @@
             </choose>
             <choose>
               <if type="bill book graphic legal_case motion_picture report song thesis manuscript" match="any">
-                <text variable="title" form="short" font-style="italic"/>
-                <text term="cited" font-style="italic" suffix="."/>
+                <text variable="title" form="short" font-style="italic" font-weight="bold"/>
+                <text term="cited" text-case="lowercase" font-style="italic" font-weight="bold" suffix="."/>
               </if>
               <else>
-                <text variable="title" text-case="capitalize-first" form="short" quotes="true"/>
-                <text value="Idem. " font-style="italic"/>
+                <text variable="container-title" text-case="capitalize-first" form="short" font-style="italic" font-weight="bold" suffix="" prefix="" quotes="true"/>
+                <text term="cited" text-case="lowercase" font-style="italic" font-weight="bold"/>
               </else>
             </choose>
-            <text variable="locator" prefix="p. " suffix="."/>
+              <label variable="locator" form="short"/>
+              <text variable="locator" suffix="."/>
           </group>
         </else-if>
         <else>
@@ -575,7 +576,7 @@
             <else-if type="article-newspaper" match="any">
               <group delimiter="" suffix=".">
                 <text macro="author" suffix=", "/>
-                <text macro="title"/>
+                <text variable="container-title" font-style="italic" font-weight="bold"/>
                 <group>
                   <text term="volume" form="short" suffix=". "/>
                   <text variable="number-of-volumes" prefix=". " suffix="/"/>
@@ -599,7 +600,7 @@
             <else-if type="article-journal article-magazine" match="any">
               <group delimiter="" suffix=".">
                 <text macro="author" suffix=", "/>
-                <text macro="title"/>
+                <text variable="container-title" font-style="italic" font-weight="bold"/>
                 <group>
                   <text term="volume" form="short" prefix=", " suffix=". "/>
                   <text variable="volume" form="short"/>
