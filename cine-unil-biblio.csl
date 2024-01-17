@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.8" delimiter-precedes-et-al="always" delimiter-precedes-last="never" et-al-min="3" page-range-format="expanded" default-locale="fr-CH">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.9" delimiter-precedes-et-al="always" delimiter-precedes-last="never" et-al-min="3" page-range-format="expanded" default-locale="fr-CH">
   <!-- À CORRIGER : les ibids/op cit ne sont pas parfaits, pas toujours de pp. et double URL dans interviews-->
   <info>
     <title>Consignes bibliographiques - UNIL Section d'histoire et esthétique du cinéma (Français - Suisse)</title>
@@ -31,8 +31,8 @@
       <term name="cited">op. cit.</term>
       <term name="long-ordinal-01"/>
       <term name="editor" form="short">dir.</term>
-      <term name="loc-cit" form="short">Ibid.</term>
-      <term name="ibid" form="short">Idem.</term>
+      <term name="loc-cit">Ibid.</term>
+      <term name="ibid">Idem.</term>
     </terms>
   </locale>
   <macro name="author">
@@ -538,7 +538,7 @@
           </group>
         </if>
         <else-if position="ibid">
-          <text term="ibid" form="short" text-case="capitalize-first" font-style="italic" font-weight="bold"/>
+          <text term="ibid" text-case="capitalize-first" font-style="italic" font-weight="bold"/>
         </else-if>
         <else-if position="subsequent">
           <group delimiter=", ">
