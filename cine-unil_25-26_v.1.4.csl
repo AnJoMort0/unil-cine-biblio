@@ -10,7 +10,7 @@
        et-al-use-first="3">
 
   <info>
-    <title>UNIL Cinéma – notes et bibliographie (2025-2026 v. 1.3)</title>
+    <title>UNIL Cinéma – notes et bibliographie (2025-2026 v. 1.4)</title>
     <title-short>UNIL Cinéma</title-short>
     <id>http://www.zotero.org/styles/unil-cinema-notes-biblio-fr-ch</id>
     <link href="http://www.zotero.org/styles/unil-cinema-notes-biblio-fr-ch" rel="self"/>
@@ -371,7 +371,9 @@
 
   <macro name="access-and-url">
     <choose>
-      <if variable="URL DOI">
+
+      <!-- DOI first -->
+      <if variable="DOI">
         <group delimiter=". ">
           <choose>
             <if variable="accessed">
@@ -381,22 +383,31 @@
               </group>
             </if>
           </choose>
-          <choose>
-            <if variable="DOI">
-              <group delimiter=" ">
-                <text value="URL&#160;:"/>
-                <text variable="DOI" prefix="https://doi.org/"/>
-              </group>
-            </if>
-            <else-if variable="URL">
-              <group delimiter=" ">
-                <text value="URL&#160;:"/>
-                <text variable="URL"/>
-              </group>
-            </else-if>
-          </choose>
+          <group delimiter=" ">
+            <text value="URL&#160;:"/>
+            <text variable="DOI" prefix="https://doi.org/"/>
+          </group>
         </group>
       </if>
+
+      <!-- THEN URL -->
+      <else-if variable="URL">
+        <group delimiter=". ">
+          <choose>
+            <if variable="accessed">
+              <group delimiter=" ">
+                <text value="consulté le"/>
+                <date variable="accessed" form="text"/>
+              </group>
+            </if>
+          </choose>
+          <group delimiter=" ">
+            <text value="URL&#160;:"/>
+            <text variable="URL"/>
+          </group>
+        </group>
+      </else-if>
+
     </choose>
   </macro>
 
@@ -497,6 +508,17 @@
     </group>
   </macro>
 
+  <macro name="site-title">
+    <choose>
+      <if variable="container-title">
+        <text variable="container-title" font-style="italic"/>
+      </if>
+      <else-if variable="publisher">
+        <text variable="publisher" font-style="italic"/>
+      </else-if>
+    </choose>
+  </macro>
+
   <macro name="entry-note">
     <group delimiter=", ">
       <choose>
@@ -505,7 +527,7 @@
         </if>
       </choose>
       <text macro="title-main"/>
-      <text variable="container-title" font-style="italic"/>
+      <text macro="site-title"/>
       <text macro="issued-year"/>
       <text macro="access-and-url"/>
     </group>
@@ -519,7 +541,7 @@
         </if>
       </choose>
       <text macro="title-main"/>
-      <text variable="container-title" font-style="italic"/>
+      <text macro="site-title"/>
       <text macro="issued-year"/>
       <text macro="access-and-url"/>
     </group>
@@ -533,11 +555,7 @@
         </if>
       </choose>
       <text macro="title-main"/>
-      <choose>
-        <if variable="container-title">
-          <text variable="container-title" font-style="italic"/>
-        </if>
-      </choose>
+      <text macro="site-title"/>
       <text macro="issued-full"/>
       <text macro="access-and-url"/>
     </group>
@@ -551,11 +569,7 @@
         </if>
       </choose>
       <text macro="title-main"/>
-      <choose>
-        <if variable="container-title">
-          <text variable="container-title" font-style="italic"/>
-        </if>
-      </choose>
+      <text macro="site-title"/>
       <text macro="issued-full"/>
       <text macro="access-and-url"/>
     </group>
@@ -569,6 +583,9 @@
         <if variable="genre">
           <text variable="genre"/>
         </if>
+        <else>
+          <text value="communication"/>
+        </else>
       </choose>
       <choose>
         <if variable="event">
@@ -594,6 +611,9 @@
         <if variable="genre">
           <text variable="genre"/>
         </if>
+        <else>
+          <text value="communication"/>
+        </else>
       </choose>
       <choose>
         <if variable="event">
@@ -705,7 +725,7 @@
             </else-if>
 
             <else-if type="paper-conference" match="any">
-              <group suffix=".">
+              <group delimiter=", " suffix=".">
                 <text macro="conference-note"/>
               </group>
             </else-if>
@@ -746,6 +766,9 @@
                   <if variable="container-title">
                     <text variable="container-title" font-style="italic"/>
                   </if>
+                  <else-if variable="publisher">
+                    <text variable="publisher" font-style="italic"/>
+                  </else-if>
                 </choose>
                 <group delimiter="">
                   <text macro="issued-year"/>
@@ -832,7 +855,7 @@
         </else-if>
 
         <else-if type="paper-conference" match="any">
-          <group suffix=".">
+          <group delimiter=", " suffix=".">
             <text macro="conference-bib"/>
           </group>
         </else-if>
@@ -905,6 +928,9 @@
               <if variable="container-title">
                 <text variable="container-title" font-style="italic"/>
               </if>
+              <else-if variable="publisher">
+                <text variable="publisher" font-style="italic"/>
+              </else-if>
             </choose>
             <group delimiter="">
               <text macro="issued-year"/>
