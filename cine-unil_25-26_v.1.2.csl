@@ -10,7 +10,7 @@
        et-al-use-first="3">
 
   <info>
-    <title>UNIL Cinéma – notes et bibliographie (2025-2026 v. 1.2)</title>
+    <title>UNIL Cinéma – notes et bibliographie (2025-2026 v. 1.3)</title>
     <title-short>UNIL Cinéma</title-short>
     <id>http://www.zotero.org/styles/unil-cinema-notes-biblio-fr-ch</id>
     <link href="http://www.zotero.org/styles/unil-cinema-notes-biblio-fr-ch" rel="self"/>
@@ -217,7 +217,7 @@
           <if variable="collection-number">
             <group prefix=" (" suffix=")" delimiter=", ">
               <group delimiter="">
-                <text value="Coll. « "/>
+                <text value="Coll. «&#8239;"/>
                 <text variable="collection-title"/>
                 <text value="&#8239;»"/>
               </group>
@@ -229,7 +229,7 @@
           </if>
           <else>
             <group prefix=" (" suffix=")">
-              <text value="Coll. « "/>
+              <text value="Coll. «&#8239;"/>
               <text variable="collection-title"/>
               <text value="&#8239;»"/>
             </group>
@@ -384,13 +384,13 @@
           <choose>
             <if variable="DOI">
               <group delimiter=" ">
-                <text value="URL :"/>
+                <text value="URL&#160;:"/>
                 <text variable="DOI" prefix="https://doi.org/"/>
               </group>
             </if>
             <else-if variable="URL">
               <group delimiter=" ">
-                <text value="URL :"/>
+                <text value="URL&#160;:"/>
                 <text variable="URL"/>
               </group>
             </else-if>
@@ -403,7 +403,14 @@
   <macro name="thesis-note">
     <group delimiter=", ">
       <text variable="title" prefix="«&#8239;" suffix="&#8239;»"/>
-      <text variable="genre"/>
+      <choose>
+        <if variable="genre">
+          <text variable="genre"/>
+        </if>
+        <else>
+          <text value="thèse"/>
+        </else>
+      </choose>
       <choose>
         <if variable="director">
           <group delimiter="">
@@ -422,7 +429,14 @@
   <macro name="thesis-bib">
     <group delimiter=", ">
       <text variable="title" prefix="«&#8239;" suffix="&#8239;»"/>
-      <text variable="genre"/>
+      <choose>
+        <if variable="genre">
+          <text variable="genre"/>
+        </if>
+        <else>
+          <text value="thèse"/>
+        </else>
+      </choose>
       <choose>
         <if variable="director">
           <group delimiter="">
@@ -483,6 +497,119 @@
     </group>
   </macro>
 
+  <macro name="entry-note">
+    <group delimiter=", ">
+      <choose>
+        <if variable="author">
+          <text macro="author-note"/>
+        </if>
+      </choose>
+      <text macro="title-main"/>
+      <text variable="container-title" font-style="italic"/>
+      <text macro="issued-year"/>
+      <text macro="access-and-url"/>
+    </group>
+  </macro>
+
+  <macro name="entry-bib">
+    <group delimiter=", ">
+      <choose>
+        <if variable="author">
+          <text macro="author-bib"/>
+        </if>
+      </choose>
+      <text macro="title-main"/>
+      <text variable="container-title" font-style="italic"/>
+      <text macro="issued-year"/>
+      <text macro="access-and-url"/>
+    </group>
+  </macro>
+
+  <macro name="web-note">
+    <group delimiter=", ">
+      <choose>
+        <if variable="author">
+          <text macro="author-note"/>
+        </if>
+      </choose>
+      <text macro="title-main"/>
+      <choose>
+        <if variable="container-title">
+          <text variable="container-title" font-style="italic"/>
+        </if>
+      </choose>
+      <text macro="issued-full"/>
+      <text macro="access-and-url"/>
+    </group>
+  </macro>
+
+  <macro name="web-bib">
+    <group delimiter=", ">
+      <choose>
+        <if variable="author">
+          <text macro="author-bib"/>
+        </if>
+      </choose>
+      <text macro="title-main"/>
+      <choose>
+        <if variable="container-title">
+          <text variable="container-title" font-style="italic"/>
+        </if>
+      </choose>
+      <text macro="issued-full"/>
+      <text macro="access-and-url"/>
+    </group>
+  </macro>
+
+  <macro name="conference-note">
+    <group delimiter=", ">
+      <text macro="author-note"/>
+      <text macro="title-main"/>
+      <choose>
+        <if variable="genre">
+          <text variable="genre"/>
+        </if>
+      </choose>
+      <choose>
+        <if variable="event">
+          <text variable="event"/>
+        </if>
+      </choose>
+      <choose>
+        <if variable="publisher-place">
+          <text variable="publisher-place"/>
+        </if>
+      </choose>
+      <text macro="issued-year"/>
+      <text macro="access-and-url"/>
+      <text macro="locator-note"/>
+    </group>
+  </macro>
+
+  <macro name="conference-bib">
+    <group delimiter=", ">
+      <text macro="author-bib"/>
+      <text macro="title-main"/>
+      <choose>
+        <if variable="genre">
+          <text variable="genre"/>
+        </if>
+      </choose>
+      <choose>
+        <if variable="event">
+          <text variable="event"/>
+        </if>
+      </choose>
+      <choose>
+        <if variable="publisher-place">
+          <text variable="publisher-place"/>
+        </if>
+      </choose>
+      <text macro="issued-year"/>
+      <text macro="access-and-url"/>
+    </group>
+  </macro>
+
   <!-- ========================= -->
   <!--         CITATION          -->
   <!-- ========================= -->
@@ -536,7 +663,7 @@
               </group>
             </if>
 
-            <else-if type="chapter entry-dictionary entry-encyclopedia" match="any">
+            <else-if type="chapter" match="any">
               <group delimiter=", " suffix=".">
                 <text macro="author-note"/>
                 <text macro="title-main"/>
@@ -547,6 +674,12 @@
                   <text macro="original-year"/>
                 </group>
                 <text macro="locator-note"/>
+              </group>
+            </else-if>
+
+            <else-if type="entry-dictionary entry-encyclopedia" match="any">
+              <group suffix=".">
+                <text macro="entry-note"/>
               </group>
             </else-if>
 
@@ -568,6 +701,12 @@
                 <text macro="issued-full"/>
                 <text macro="locator-note"/>
                 <text macro="access-and-url"/>
+              </group>
+            </else-if>
+
+            <else-if type="paper-conference" match="any">
+              <group suffix=".">
+                <text macro="conference-note"/>
               </group>
             </else-if>
 
@@ -594,16 +733,8 @@
             </else-if>
 
             <else-if type="webpage post-weblog" match="any">
-              <group delimiter=", " suffix=".">
-                <text macro="author-note"/>
-                <text macro="title-main"/>
-                <choose>
-                  <if variable="container-title">
-                    <text variable="container-title" font-style="italic"/>
-                  </if>
-                </choose>
-                <text macro="issued-full"/>
-                <text macro="access-and-url"/>
+              <group suffix=".">
+                <text macro="web-note"/>
               </group>
             </else-if>
 
@@ -659,7 +790,7 @@
           </group>
         </if>
 
-        <else-if type="chapter entry-dictionary entry-encyclopedia" match="any">
+        <else-if type="chapter" match="any">
           <group delimiter=", " suffix=".">
             <text macro="author-bib"/>
             <text macro="title-main"/>
@@ -670,6 +801,12 @@
               <text macro="original-year"/>
             </group>
             <text macro="pages-bib"/>
+          </group>
+        </else-if>
+
+        <else-if type="entry-dictionary entry-encyclopedia" match="any">
+          <group suffix=".">
+            <text macro="entry-bib"/>
           </group>
         </else-if>
 
@@ -691,6 +828,12 @@
             <text macro="issued-full"/>
             <text macro="pages-bib"/>
             <text macro="access-and-url"/>
+          </group>
+        </else-if>
+
+        <else-if type="paper-conference" match="any">
+          <group suffix=".">
+            <text macro="conference-bib"/>
           </group>
         </else-if>
 
@@ -749,16 +892,8 @@
         </else-if>
 
         <else-if type="webpage post-weblog" match="any">
-          <group delimiter=", " suffix=".">
-            <text macro="author-bib"/>
-            <text macro="title-main"/>
-            <choose>
-              <if variable="container-title">
-                <text variable="container-title" font-style="italic"/>
-              </if>
-            </choose>
-            <text macro="issued-full"/>
-            <text macro="access-and-url"/>
+          <group suffix=".">
+            <text macro="web-bib"/>
           </group>
         </else-if>
 
